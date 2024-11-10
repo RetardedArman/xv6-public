@@ -1,6 +1,3 @@
-#ifndef NN
-#define NN
-#include "spinlock.h"
 // Per-CPU state
 
 #define MAX_SYSCALLS 128
@@ -67,21 +64,9 @@ struct proc {
 
 
 
-=======
-  int syscalls [25] ;
-  int  numofsyscalls;
-};
-
-struct ptable_struct {
-  struct spinlock lock;
-  struct proc proc [10] ;
-};
-
-extern struct ptable_struct ptable;
 // Process memory is laid out contiguously, low addresses first:
 //   text
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
-#endif
 
