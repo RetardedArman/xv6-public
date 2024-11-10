@@ -1,5 +1,6 @@
 struct stat;
 struct rtcdate;
+struct proc;
 
 // system calls
 int fork(void);
@@ -23,9 +24,14 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
-int create_palindrome(void);
 int sort_syscalls(int pid);
-int get_max_invoked_syscall(int pid);
+int get_process_by_pid(int, struct proc**);
+int get_most_invoked_syscall(int);
+int list_all_processes(void);
+int move_file(const char *src_file, const char *dest_dir);
+void find_palindrome(int);
+
+
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);
