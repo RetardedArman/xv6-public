@@ -2,6 +2,9 @@
 #define NN
 #include "spinlock.h"
 // Per-CPU state
+
+#define MAX_SYSCALLS 128
+
 struct cpu {
   uchar apicid;                // Local APIC ID
   struct context *scheduler;   // swtch() here to enter scheduler
@@ -37,6 +40,11 @@ struct context {
 
 enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
+struct syscall_entry {
+    int syscall_number; //id of the syscall
+    int count;  // number of times the syscall has been called        
+};
+
 // Per-process state
 struct proc {
   uint sz;                     // Size of process memory (bytes)
@@ -52,6 +60,14 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  struct syscall_entry syscalls[MAX_SYSCALLS];
+  int syscall_count;
+};
+
+
+
+
+=======
   int syscalls [25] ;
   int  numofsyscalls;
 };
@@ -68,3 +84,4 @@ extern struct ptable_struct ptable;
 //   fixed-size stack
 //   expandable heap
 #endif
+
