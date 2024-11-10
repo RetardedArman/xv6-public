@@ -221,3 +221,9 @@ void sys_find_palindrome(void){
   cprintf("KERNEL: sys_find_palindrome(%d)\n" , num);
   find_palindrome(num);
 }
+int
+sys_create_palindrome(void){
+	int num = myproc()->tf->ebx;
+	cprintf("KERNEL: sys_create_palindrome() is called!\n",num);
+	return create_palindrome(num);
+}
